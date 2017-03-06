@@ -8,8 +8,7 @@ sample_clips_data = [
     'src_filename': "GOPR0214.MP4",
     'output_filename': "test1.mp4",
     'clip_in': 6,
-    'clip_out': 8
-}]
+    'clip_out': 8}]
 
 
 # GOPRO189.MP4|worm_burner_save 1:59 2:17|ninja_stick_save 2:12 2:15 |flow_to_crash 2:23 3:00| crash 2:52 3:00
@@ -50,7 +49,7 @@ def read_in_clips_data(file):
                 elem['src_filename']=raw_filename
                 start_time = get_timecode(clip.split()[1])
                 end_time = get_timecode(clip.split()[2])
-                elem['output_filename']=raw_filename_sub + "_%s_%s_%s.MP4" % ( clip.split()[0], start_time, end_time )
+                elem['output_filename']=raw_filename_sub + "_%s_%s_%s.MP4" % ( clip.split()[0], start_time.replace(':','.'), end_time.replace(':','.') )
                 elem['clip_in']="%s" % ( start_time )
                 elem['clip_out']="%s" % ( end_time )
                 data.append(elem)
@@ -68,7 +67,7 @@ if __name__ == '__main__':
     # print get_timecode("56")
     # print get_timecode("1:22.30")
 
-    video_file = "raw/videos.txt"
+    video_file = "videos.txt"
     clips = read_in_clips_data(video_file)
 
     for clip in clips:
